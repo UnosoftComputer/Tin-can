@@ -738,10 +738,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1a24a9d8f1c0344994fa716ed984fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Track
-  rinks:
+  _wheels:
   - {fileID: 1742869973}
   - {fileID: 805595233}
-  _stiffnessFactor: 0.06
+  _moveStiffness: 1.5
+  _turnStiffness: 0.06
 --- !u!1 &1428711417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,10 +1013,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1a24a9d8f1c0344994fa716ed984fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Track
-  rinks:
+  _wheels:
   - {fileID: 1428711419}
   - {fileID: 369564317}
-  _stiffnessFactor: 0.06
+  _moveStiffness: 1.5
+  _turnStiffness: 0.06
 --- !u!1 &1742869971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,7 +1274,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1805695236}
   serializedVersion: 5
-  m_Mass: 20000
+  m_Mass: 10000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: -0.5, z: 0}
@@ -1318,8 +1320,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankMove
   _left: {fileID: 1205549642}
   _right: {fileID: 1729096993}
-  _motorTorque: 1000
+  _motorTorque: 2000
+  _turnTorque: 2000
   _brakeTorque: 3000
+  _inputDeadzone: 0.1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

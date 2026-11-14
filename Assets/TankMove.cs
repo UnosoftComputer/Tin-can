@@ -5,32 +5,39 @@ public class TankMove : MonoBehaviour
     [Header("Tracks")]
     [SerializeField] private Track _left;
     [SerializeField] private Track _right;
-    [Header("Movent settings")]
-    [SerializeField] private float _motorTorque = 1500f;
-    [SerializeField] private float _brakeTorque = 3000f;
 
-    public void Left(float direction)
+    [Header("Movement settings")]
+    [SerializeField] private float _motorTorque = 1500f;
+    [SerializeField] private float _turnTorque = 2000f; 
+    [SerializeField] private float _brakeTorque = 3000f;
+    [SerializeField] private float _inputDeadzone = 0.1f;
+
+    public void Drive(float forward, float steer)
     {
-        if (direction == 0)
+        bool isTurning = steer != 0f;
+        float baseTorque = (forward == 0f) ? _turnTorque : _motorTorque;
+        float leftSpeed = Mathf.Clamp(forward + steer, -1f, 1f);
+        float rightSpeed = Mathf.Clamp(forward - steer, -1f, 1f);
+        if (Mathf.Abs(forward) < _inputDeadzone) forward = 0f;
+        if (Mathf.Abs(steer) < _inputDeadzone) steer = 0f;
+        if (forward == 0f && steer == 0f)
         {
-            _left.Stop(_brakeTorque);
+            _left.SetTurning(isTurning);
+            _right.SetTurning(isTurning);
+            Stop();
+            return;
         }
-        else
-        {
-            _left.Stop(0);
-            _left.Move(direction * _motorTorque);
-        }
-    }  
-    public void Right(float direction)
+
+        _left.SetTurning(isTurning);
+        _right.SetTurning(isTurning);
+
+        _left.Move(leftSpeed * baseTorque);
+        _right.Move(rightSpeed * baseTorque);
+    }
+
+    public void Stop()
     {
-        if (direction == 0)
-        {
-            _right.Stop(_brakeTorque);
-        }
-        else
-        {
-            _right.Stop(0);
-            _right.Move(direction * _motorTorque);
-        }
+        _left.Stop(_brakeTorque);
+        _right.Stop(_brakeTorque);
     }
 }
