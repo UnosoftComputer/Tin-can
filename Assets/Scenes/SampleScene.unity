@@ -960,7 +960,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &330585544
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2560,7 +2560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &841610693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3201,7 +3201,6 @@ Transform:
   - {fileID: 22649675}
   - {fileID: 805595232}
   - {fileID: 2055914129}
-  - {fileID: 1729096992}
   m_Father: {fileID: 1805695240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1205549642
@@ -3906,7 +3905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!154 &1699434775
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -4009,15 +4008,15 @@ Transform:
   m_GameObject: {fileID: 1729096991}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.654411, y: -0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.8099975, y: -0.5500001, z: -0.044999465}
+  m_LocalScale: {x: 0.2705848, y: 0.27058482, z: 0.09593161}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1428711418}
   - {fileID: 396186949}
   - {fileID: 369564316}
   - {fileID: 1026875314}
-  m_Father: {fileID: 1205549641}
+  m_Father: {fileID: 1805695240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1729096993
 MonoBehaviour:
@@ -4283,6 +4282,7 @@ Transform:
   m_Children:
   - {fileID: 1205549641}
   - {fileID: 330585546}
+  - {fileID: 1729096992}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 155.25, z: 0}
 --- !u!54 &1805695242
@@ -4515,7 +4515,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1180945262}
+  m_Mesh: {fileID: 704717938}
 --- !u!33 &2113024349
 MeshFilter:
   m_ObjectHideFlags: 10

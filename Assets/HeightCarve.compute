@@ -1,0 +1,48 @@
+#pragma kernel Carve
+
+RWTexture2D<float4> HeightTex; // карта высот, высота в R-канале
+
+float2 _Center; // UV точки нажатия
+float _Radius; // радиус кисти в UV
+float _Strength; // максимальная глубина выемки (0..1)
+float _Aspect; // ширина/высота карты, чтобы кисть была круглой
+
+[numthreads(8, 8, 1)]
+void Carve(uint3 id : SV_DispatchThreadID)
+{
+    uint w, h;
+    HeightTex.GetDimensions(w, h);
+    if (id.x >= w || id.y >= h)
+        return;
+
+    float2 uv = (id.xy + 0.5) / float2(w, h);
+
+    // расстояние до центра кисти, скорректированное на пропорции карты
+    float dist = length((uv - _Center) * float2(_Aspect, 1.0)) / _Radius;
+    if (dist >= 1.0)
+        return;
+
+    // функция спада: 1 в центре, 0 на краю радиуса
+    // плавная полусфера:
+    float falloff = 0.5 + 0.5 * cos(dist * 3.1415f);
+    // варианты: квадратичный — 1 - dist*dist;
+    // «плато» — smoothstep(1, 0.7, dist);
+
+    float height = HeightTex[id.xy].r;
+    height -= _Strength * falloff;
+    HeightTex[id.xy] = float4(height, height, height, 1);
+}
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+RWTexture2D<float4> Result;
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    // TODO: insert actual code here!
+
+    Result[id.xy] = float4(id.x & id.y, (id.x & 15)/15.0, (id.y & 15)/15.0, 0.0);
+}
