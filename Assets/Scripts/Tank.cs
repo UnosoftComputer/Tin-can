@@ -4,29 +4,31 @@ using UnityEngine.UI;
 
 public class Tank : MonoBehaviour
 {
-    [SerializeField] private Slider whell;
-    [SerializeField] private Slider lever;
-    [SerializeField] private Vector2 playerPosition;
+    [SerializeField] private TankInput _tankIpuntSystem;
+    [SerializeField] private Transform aim;
     private TankGun _gun;
-    private TankMove _move;
+    private TankMoveAlt _move;
     private void Awake()
     {
-        _move = new TankMove(1, 0.5f, 15);
-        _gun = new TankGun();
-        _gun.alpha = 10;
-        _gun.beta = -90;
+        _move = new TankMoveAlt(1, 0.5f, 15);
+        _gun = new TankGun(6, 9.81f, -90, 45);
+
     }
     
-    private void Shoot(InputAction.CallbackContext obj)
+    private void Shoot()
     {
-        Debug.Log(new Vector2(_gun.GetCoordinates().y + playerPosition.x, -_gun.GetCoordinates().x + playerPosition.y));
+        _gun.beta = transform.rotation.eulerAngles.z;
+        aim.position = new Vector3(_gun.GetCoordinates().y + transform.position.x, _gun.GetCoordinates().x + transform.position.y, 0);
     }
    
     private void Update()
     {
-        Vector2 input = new Vector2(whell.value, lever.value);
-        transform.Rotate(0f, 0f, _move.Rotate(input, 0.1f), Space.Self);
-        transform.Translate(_move.Move(input, 0.1f), Space.Self);
+        _gun.alpha += _tankIpuntSystem.GetGunValue().x;
+        Vector2 input = _tankIpuntSystem.GetMoveValue();
+        transform.Rotate(0f, 0f, _move.Rotate(input.x, 0.1f), Space.Self);
+        transform.Translate(_move.Move(input.y, 0.1f), Space.Self);
+
+        Shoot();
     }
 
 

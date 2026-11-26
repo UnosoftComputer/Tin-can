@@ -7,7 +7,6 @@ public class TankMove
     private float _backwardSpeed;
     private float _rotateSpeed;
     #endregion
-
     #region PUBLIC_VARIBLES
     public float forwardSpeed
     {

@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class TankGun
 {
-    private const float _freeFallAcceleration = 9.81f;
-    private const float _speed = 2f;
+    #region PRIVATE_VARIBLES
+    private float _freeFallAcceleration = 9.81f;
+    private float _speed = 5f;
     private float _beta;
     private float _alpha;
+    #endregion
+    #region PUBLIC_VARIBLES
     public float beta
     {
         get
@@ -14,7 +17,7 @@ public class TankGun
         }
         set 
         { 
-            _beta = (value >= -90) && (90 > value) ? value : 90; 
+            _beta = (value > -360) && (360 > value) ? value : 0; 
         }
     }
 
@@ -26,17 +29,25 @@ public class TankGun
         }
         set
         {
-            _alpha = (value >= 0) && (90 > value) ? value : 45;
+            _alpha = (value > 1) && (90 > value) ? value : 45;
         }
     }
+    #endregion
 
-    private float GetLenght()
+    public TankGun(float speed = 5f, float freeFallAcceleration = 9.81f,float beta = -90, float alpha = 45)
+    {
+        _speed = speed;
+        _freeFallAcceleration = freeFallAcceleration;
+        this.beta = beta;
+        this.alpha = alpha;
+    }
+    private float GetLength()
     {
         return (Mathf.Pow(_speed,2)*Mathf.Sin(Mathf.Deg2Rad*2*alpha)) / _freeFallAcceleration;
     }
     public Vector2 GetCoordinates()
     {
-        return new Vector2(GetLenght()* Mathf.Cos(Mathf.Deg2Rad * beta), GetLenght() * Mathf.Sin(Mathf.Deg2Rad * beta));
+        return new Vector2(GetLength()* Mathf.Cos(Mathf.Deg2Rad * beta), -GetLength() * Mathf.Sin(Mathf.Deg2Rad * beta));
     }
 
 
