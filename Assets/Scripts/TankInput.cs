@@ -22,7 +22,7 @@ public class TankInput : MonoBehaviour
     }
     public Vector2 GetGunValue()
     {
-        return new Vector2(_inputSystem.Player.Move.ReadValue<Vector2>().x,0);
+        return new Vector2(_inputSystem.Player.Move.ReadValue<Vector2>().x*0.01f,0);
     }
 
     public Vector2 GetMoveValue()
