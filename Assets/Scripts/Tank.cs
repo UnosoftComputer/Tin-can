@@ -12,8 +12,8 @@ public class Tank : MonoBehaviour
     private TankBounds _bounds;
     private void Awake()
     {
-        _move = new TankMoveAlt(1, 0.5f, 15);
-        _gun = new TankGun(6, 9.81f, -90, 45);
+        _move = new TankMoveAlt(0.1f, 0.05f, 15);
+        _gun = new TankGun(4, 9.81f, -90, 45);
         _bounds = new TankBounds(GetWorldPoints(boundsSource), 0.2f);
     }
     private Vector2[] GetWorldPoints(PolygonCollider2D source)
@@ -26,7 +26,7 @@ public class Tank : MonoBehaviour
             world[i] = source.transform.TransformPoint(local[i] + source.offset);
         return world;
     }
-    private void Shoot()
+    public void Shoot()
     {
         aim.position = new Vector3(_gun.GetCoordinates().y + transform.position.x, _gun.GetCoordinates().x + transform.position.y, 0);
     }
@@ -35,7 +35,6 @@ public class Tank : MonoBehaviour
     {
         _gun.alpha = _tankIpuntSystem.GetGunValue().x;
         _gun.beta = _tankIpuntSystem.GetGunValue().y+ transform.rotation.eulerAngles.z;
-        Shoot();
         Vector2 input = _tankIpuntSystem.GetMoveValue();
         Vector2 before = transform.position;
 

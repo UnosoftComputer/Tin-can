@@ -127,14 +127,5 @@ public class TankBounds
         float t = Mathf.Clamp01(Vector2.Dot(p - a, ab) / sqr);
         return a + ab * t;
     }
-    public Vector2[] GetWorldPoints(PolygonCollider2D source)
-    {
-        if (source == null) return new Vector2[0];
 
-        Vector2[] local = source.GetPath(0);
-        Vector2[] world = new Vector2[local.Length];
-        for (int i = 0; i < local.Length; i++)
-            world[i] = source.transform.TransformPoint(local[i] + source.offset);
-        return world;
-    }
 }

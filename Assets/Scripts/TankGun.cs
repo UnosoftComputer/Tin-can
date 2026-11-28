@@ -29,7 +29,7 @@ public class TankGun
         }
         set
         {
-            _alpha = (value > 1) && (90 > value) ? value : 90;
+            _alpha = (value > 10) && (90 > value) ? value : 90;
         }
     }
     #endregion
