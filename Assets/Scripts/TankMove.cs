@@ -42,7 +42,7 @@ public class TankMove
     #endregion
 
     public TankMove(float _forwardSpeed, float _backwardSpeed, float _rotateSpeed,
-                    float accelTime = 1f, float coastTime = 0.9f)
+                    float accelTime = 2f, float coastTime = 3f)
     {
         forwardSpeed = _forwardSpeed;
         backwardSpeed = _backwardSpeed;

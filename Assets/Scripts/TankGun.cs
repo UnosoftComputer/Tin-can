@@ -17,7 +17,7 @@ public class TankGun
         }
         set 
         { 
-            _beta = (value > -360) && (360 > value) ? value : 0; 
+            _beta = value ; 
         }
     }
 

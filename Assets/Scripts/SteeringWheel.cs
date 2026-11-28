@@ -8,7 +8,7 @@ public class SteeringWheel : MonoBehaviour,
     [SerializeField] private float maxAngle = 90f;
     [SerializeField] private TweenSettings returnTween = new(0.35f, Ease.OutBack);
 
-    public float Value => -angle / maxAngle;   
+    public float Value => angle / maxAngle;   
 
     private float angle, lastPointerAngle;
     private Camera cam;

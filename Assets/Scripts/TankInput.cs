@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class TankInput : MonoBehaviour
 {
     [SerializeField] private SteeringWheel steeringWheel;
+    [SerializeField] private Circle leght;
+    [SerializeField] private Circle azimut;
     private InputSystem_Actions _inputSystem;
     private void Awake()
     {
@@ -22,11 +24,11 @@ public class TankInput : MonoBehaviour
     }
     public Vector2 GetGunValue()
     {
-        return new Vector2(_inputSystem.Player.Move.ReadValue<Vector2>().x*0.01f,0);
+        return new Vector2(leght.Value,azimut.Value);
     }
 
     public Vector2 GetMoveValue()
     {
-        return new Vector2(-steeringWheel.Value, _inputSystem.Player.Move.ReadValue<Vector2>().y);
+        return new Vector2(steeringWheel.Value, _inputSystem.Player.Move.ReadValue<Vector2>().y);
     }
 }
